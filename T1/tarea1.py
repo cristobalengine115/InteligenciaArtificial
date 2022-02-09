@@ -1,61 +1,44 @@
 import math
 
-# # 2 .- POLINOMIOS GRADO N
-# grado1 = int(input('INGRESE EL GRADO DEL POLINOMIO 1: '))
-# grado2 = int(input('INGRESE EL GRADO DEL POLINOMIO 2: '))
-# #grado1 = grado1+1
-# #grado2 = grado2+1
-# polinomio1 = []
-# polinomio2 = []
+# VALOR EN UN PUNTO
+def valor_punto_pol(polinomio,grado):
+    valor = 0
+    point = int(input('INGRESE EL PUNTO A EVALUAR LOS POLINOMIOS'))
+    for i in range(grado):
+        valor += polinomio[i] * (point ** (grado-i))
+    return valor
 
-# print('INGRESE LOS VALORES PARA EL POLINOMIO 1')
-# for i in range(grado1):
-#     x = int(input('x^' +str(grado1-i) +' -> '))
-#     polinomio1.append(x)
+# SUMA
+def convertir_polinomio(polinomio1,polinomio2,grado1,grado2):
+    aux=[]
+    if grado1 == grado2:
+        pass
+    elif grado1 > grado2:
+        num = grado1-grado2
+        for i in range(num):
+            aux.append(0)
+        polinomio2 = aux + polinomio2
+    else:
+        num = grado2-grado1
+        for i in range(num):
+            aux.append(0)
+        polinomio1 = aux + polinomio1
+    return polinomio1,polinomio2,grado1,grado2
+def suma_polinomio(polinomio1,polinomio2):
+    suma=[]
+    for i in range(len(polinomio1)):
+        suma.append(polinomio1[i]+polinomio2[i])
+    print(suma)
+# RESTA
+def resta_polinomio(polinomio1,polinomio2):
+    resta=[]
+    for i in range(len(polinomio1)):
+        resta.append(polinomio1[i]-polinomio2[i])
+    print(resta)
 
-# print('INGRESE LOS VALORES PARA EL POLINOMIO 2')
-# for i in range(grado2):
-#     x = int(input('x^' +str(grado2-i) +' -> '))
-#     polinomio2.append(x)
-# # VALOR EN UN PUNTO
-# val1=0
-# val2=0
-# point = int(input('INGRESE EL PUNTO A EVALUAR LOS POLINOMIOS'))
-# for i in range(grado1):
-#     val1 += polinomio1[i] * (point ** (grado1-i))
-
-# for i in range(grado2):
-#     val2 += polinomio2[i] * (point ** (grado2-i))
-# print(val1)
-# print(val2)
-
-# # SUMA
-# aux=[]
-# if grado1 == grado2:
-#     pass
-# elif grado1 > grado2:
-#     num = grado1-grado2
-#     for i in range(num):
-#         aux.append(0)
-#     polinomio2 = aux + polinomio2
-# else:
-#     num = grado2-grado1
-#     for i in range(num):
-#         aux.append(0)
-#     polinomio1 = aux + polinomio1
-
-# suma=[]
-# for i in range(len(polinomio1)):
-#     suma.append(polinomio1[i]+polinomio2[i])
-# print(suma)
-# # RESTA 
-# resta=[]
-# for i in range(len(polinomio1)):
-#     resta.append(polinomio1[i]-polinomio2[i])
-# print(resta)
-# # MULTIPLICACION
-# # DERIVADA
-# # INTEGRAL
+# MULTIPLICACION
+# DERIVADA
+# INTEGRAL
 
 
 
@@ -99,30 +82,82 @@ def angulo_vec(dim,vec1,vec2):
     return anguloRad, anguloGrad
 
 
-
-# 1 .- VECTORES DE N-DIMENSIONES
-print("")
-dim = int(input('INGRESE LAS DIMENSIONES DE LOS VECTORES: '))
-vec1 = []
-print('INGRESE '+str(dim)+' VALORES PARA EL VECTOR 1')
-for i in range(dim):
-    x = int(input('->'))
-    vec1.append(x)
-vec2 = []
-print('INGRESE '+str(dim)+' VALORES PARA EL VECTOR 2')
-for i in range(dim):
-    x = int(input('->'))
-    vec2.append(x)
-
-
-escalar = int(input('INGRESE EL ESCALAR AL QUE QUIERE MULTIPLICAR EL VECTOR'))
+def operaciones_vectores():
+    ## VECTORES DE N-DIMENSIONES
+    print("")
+    dim = int(input('INGRESE LAS DIMENSIONES DE LOS VECTORES: '))
+    vec1 = []
+    print('INGRESE '+str(dim)+' VALORES PARA EL VECTOR 1')
+    for i in range(dim):
+        x = int(input('->'))
+        vec1.append(x)
+    vec2 = []
+    print('INGRESE '+str(dim)+' VALORES PARA EL VECTOR 2')
+    for i in range(dim):
+        x = int(input('->'))
+        vec2.append(x)
 
 
-print("La suma es:"+str(suma_vectores(dim,vec1,vec2)))
-print("La resta es:"+str(resta_vectores(dim,vec1,vec2)))
-print("El escalar del vector 1 es:"+str(escalar_vec(dim,vec1,escalar)))
-print("El escalar del vector 2 es:"+str(escalar_vec(dim,vec2,escalar)))
-print("La norma es:"+str(norma_vec(dim,vec1,vec2)))
-anguloRad, anguloGrad = angulo_vec(dim,vec1,vec2)
-print("El angulo en radianes es:"+str(anguloRad))
-print("El angulo en grados es:"+str(anguloGrad))
+    escalar = int(input('INGRESE EL ESCALAR AL QUE QUIERE MULTIPLICAR EL VECTOR'))
+
+    ##OPERACIONES SOLICITADAS PARA VECTORES
+    print("La suma es:"+str(suma_vectores(dim,vec1,vec2)))
+    print("La resta es:"+str(resta_vectores(dim,vec1,vec2)))
+    print("El escalar del vector 1 es:"+str(escalar_vec(dim,vec1,escalar)))
+    print("El escalar del vector 2 es:"+str(escalar_vec(dim,vec2,escalar)))
+    print("La norma es:"+str(norma_vec(dim,vec1,vec2)))
+    anguloRad, anguloGrad = angulo_vec(dim,vec1,vec2)
+    print("El angulo en radianes es:"+str(anguloRad))
+    print("El angulo en grados es:"+str(anguloGrad))
+
+
+
+def operaciones_polinomio():
+    ## POLINOMIOS GRADO N
+    grado1 = int(input('INGRESE EL GRADO DEL POLINOMIO 1: '))
+    grado2 = int(input('INGRESE EL GRADO DEL POLINOMIO 2: '))
+    #grado1 = grado1+1
+    #grado2 = grado2+1
+    polinomio1 = []
+    polinomio2 = []
+
+    print('INGRESE LOS VALORES PARA EL POLINOMIO 1')
+    for i in range(grado1+1):
+        x = int(input('x^' +str(grado1-i) +' -> '))
+        polinomio1.append(x)
+
+    print('INGRESE LOS VALORES PARA EL POLINOMIO 2')
+    for i in range(grado2+1):
+        x = int(input('x^' +str(grado2-i) +' -> '))
+        polinomio2.append(x)
+
+
+    polinomio1,polinomio2,grado1,grado2 = convertir_polinomio(polinomio1,polinomio2,grado1,grado2,)
+
+
+    ##OPERACIONES SOLICITADAS PARA POLINOMIOS
+    print("El valor en un punto para el polinomio 1 es:"+str(valor_punto_pol(polinomio1,grado1)))
+    print("El valor en un punto para el polinomio 1 es:"+str(valor_punto_pol(polinomio2,grado2)))
+    print("La suma es:"+str(suma_polinomio(polinomio1,polinomio2)))
+    print("La resta es:"+str(resta_polinomio(polinomio1,polinomio2)))
+    # print("La multiplicación es:"+str(escalar_vec(dim,vec1,escalar)))
+    # print("La derivada es:"+str(escalar_vec(dim,vec2,escalar)))
+    # print("La integral es:"+str(norma_vec(dim,vec1,vec2)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# operaciones_vectores()
+operaciones_polinomio()
