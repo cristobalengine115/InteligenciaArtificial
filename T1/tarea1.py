@@ -109,6 +109,7 @@ def integral_polinomio(polinomio):
 	integral=[]
 	for i in range(len(polinomio)):
 		integral.append(((polinomio[i]*1.0)*(1/(len(polinomio)-i))))
+	integral.append(0)
 	imprimir_polinomios(integral)
 
 # Imprimir polinomios
