@@ -18,17 +18,32 @@ def leer_archivo():
 		for row in reader:
 			documento.append(row)
 	print(documento)
-	dim = int(''.join(documento[0]))
-	vector1 = list(map(int,documento[1]))
-	vector2 = list(map(int,documento[2]))
-	escalar=int(''.join(documento[3]))
-	grad1 = int(''.join(documento[4]))
-	grad2 = int(''.join(documento[5]))
-	poli1 = list(map(int,documento[6]))
-	poli2 = list(map(int,documento[7]))
-	pnt = int(''.join(documento[8]))
+
+	vector1 = list(map(int,documento[0]))
+	vector2 = list(map(int,documento[1]))
+	escalar=int(''.join(documento[2]))
+	poli1 = list(map(int,documento[3]))
+	poli2 = list(map(int,documento[4]))
+	pnt = int(''.join(documento[5]))
+	dim = valida_dimension(vector1,vector2)
+	grad1 = valida_grado(poli1)
+	grad2 = valida_grado(poli2)
 	return dim,vector1,vector2,escalar,grad1,grad2,poli1,poli2,pnt
+
+def valida_dimension(vector1, vector2):
+    dim1 = len(vector1)
+    dim2 = len(vector2)
+    if dim1 == dim2:
+        return dim1
+    else:
+        return None
+
+def valida_grado(polinomio):
+    return len(polinomio)-1
+
+
 # Polinomios
+
 # Valor en un punto
 
 def valor_punto_pol(polinomio,grado,point):
