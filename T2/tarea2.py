@@ -1,4 +1,5 @@
 def codificar_letra(letra):
+    '''Takes a single letter,returns the coded letter.'''
     if letra == 'A':
         return '90'
     elif letra == 'B':
@@ -51,6 +52,7 @@ def codificar_letra(letra):
         return '54'
 
 def decodificar_letra(par_num):
+    '''Takes a number that represents the coded letter,returns the letter asociated with that number.'''
     if par_num == '90':
         return 'A'
     elif par_num == '91':
@@ -68,7 +70,7 @@ def decodificar_letra(par_num):
     elif par_num == '82':
         return 'H'
     elif par_num == '83':
-        return 'I'
+        return '[I/J]'
     elif par_num == '84':
         return 'K'
     elif par_num == '70':
@@ -105,50 +107,67 @@ def decodificar_letra(par_num):
         return None
 
 def codificar_palabra(palabra):
+    '''Takes the word to be coded and prints it. Returns nothing'''
+    palabra= normalizar_cadena(palabra)
     palabra_codificada = ''
     for i in range(len(palabra)):
         if(codificar_letra(palabra[i]) != None):
             palabra_codificada += codificar_letra(palabra[i])
         else:
-            print('LA PALABRA CONTIENE CARACTERES ILEGALES')
             return None
-    print("LA PALABRA CODIFICADA ES: "+palabra_codificada)
+    return palabra_codificada
 
 def decodificar_palabra(code):
+    '''Takes the coded word and prints it. Returns None if the coded word is invalid'''
     if(not(code.isnumeric() and len(code)%2 == 0)):
-        print("INGRESE UNA PALABRA CODIFICADA VÁLIDA")
         return None
     palabra_decodificada = ''
     for i in range(len(code)):
         if(i%2 == 0):
             if(decodificar_letra(code[i:i+2]) == None):
-                print("LA PALABRA NO SE PUDO DECODIFICAR")
                 return None
             else:
                 palabra_decodificada += str(decodificar_letra(code[i:i+2]))
         else:
             pass
-    print("LA PALABRA DECODIFICADA ES: "+palabra_decodificada)
+    return palabra_decodificada
 
-def normalizar_cadena(palabra):
-    palabra = palabra.upper()
-    palabra = palabra.replace(" ","")
-    return palabra
+def normalizar_cadena(frase):
+    '''Takeas a sentence. returns the sentence without spaces and all in uppercase'''
+    frase = frase.upper()
+    frase = frase.replace(" ","")
+    return frase
 
 
 def main():
-    print("BIENVENIDO AL SISTEMA DECODIFICADOR")
-    print("ESCOGA UNA OPCION")
-    print("1.-CODIFICAR MENSAJE")
-    print("2.-DECODIFICAR MENSAJE")
-    decision = int(input('->'))
-    if decision == 1:
-        word =  input('INGRESE LA FRASE A CODIFICAR\n-->')
-        codificar_palabra(normalizar_cadena(word))
-    elif decision == 2:
-        code = input('INGRESE LA FRASE A DECODIFICAR\n-->')
-        decodificar_palabra(code)    
-    else:
-        print("INGRESE UN VALOR CORRECTO") 
+    '''Main function that starts the program '''
+    while(True):
+        print("====================================")
+        print("BIENVENIDO AL SISTEMA DECODIFICADOR")
+        print("ESCOGA UNA OPCION")
+        print("1.-CODIFICAR MENSAJE")
+        print("2.-DECODIFICAR MENSAJE")
+        print("3.-SALIR")
+        decision = int(input('->'))
+        if decision == 1:
+            word =  input('INGRESE LA FRASE A CODIFICAR\n-->')
+            codificado = codificar_palabra(word)  
+            if codificado != None:
+                print("LA PALABRA CODIFICADA ES: "+codificado)
+            else:
+                print('LA PALABRA CONTIENE CARACTERES ILEGALES')
+        elif decision == 2:
+            code = input('INGRESE LA FRASE A DECODIFICAR\n-->')
+            
+            decodificado = decodificar_palabra(code)  
+            if decodificado != None:
+                print("LA PALABRA DECODIFICADA ES: "+decodificado)
+            else:
+                print("INGRESE UNA PALABRA CODIFICADA VÁLIDA")
+        elif decision == 3:
+            return
+        else:
+            print("INGRESE UN VALOR CORRECTO") 
+        print("====================================")
 
-main()
+#main()
