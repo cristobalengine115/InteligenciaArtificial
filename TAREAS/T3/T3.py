@@ -71,8 +71,7 @@ def main():
 	poblacion = int(input('Ingrese la cantidad de población requerida\n-->'))
 	num_gen = int(input('Ingrese el numero de generaciones\n-->'))
 	poblacion_actual = crear_poblacion(poblacion)
-	poblacion_inicial = poblacion_actual
-	print("Poblacion Inicial: ", end=' ')
+	print("Poblacion Inicial:       ", end=' ')
 	print(poblacion_actual)
 	reglas = crear_tabla_reglas()
 	for i in range(num_gen):
