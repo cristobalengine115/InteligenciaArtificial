@@ -23,8 +23,8 @@ Si no se comenta la línea se recomienda ingresar el número 3 en el menú y eje
 ```
 Para ejecutar las pruebas se puede escribir cualquiera de los siguientes comandos
 ```sh
-python3 test_tarea2.py
+python3 test_tarea4.py
 ```
 ```sh
-python3 -m unittest test_tarea2.py
+python3 -m unittest test_tarea4.py
 ```
