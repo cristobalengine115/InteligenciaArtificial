@@ -1,8 +1,8 @@
-
 import string
 
 
 def dectofloat(dec):
+    '''Converts decimal part to binary'''
     if(dec<0):
         signo=str(1)
     else:
@@ -49,6 +49,7 @@ def dectofloat(dec):
 
 
 def floattodec(bit):
+    '''Converts decimal part to binary'''
     s=int(bit[0])
     n=bit[1:9]
     exp=binario_a_decimal(n)
@@ -65,6 +66,7 @@ def floattodec(bit):
 
 
 def binario_a_decimal(binario):
+    '''Transforms binary to decimal'''
     posicion = 0
     decimal = 0
     binario = binario[::-1]
@@ -75,34 +77,34 @@ def binario_a_decimal(binario):
     return decimal
 
 #dectofloat(9.625)
-floattodec("01000001000110100000000000000000")
+# floattodec("01000001000110100000000000000000")
 
-def menu():
-    exit=True
-    while(exit):
-        print("Bienvenido al convertidor a punto flotante")
-        print("Que desea realizar?")
-        print("Ingrese 1 si quiere pasar de flotante a binario")
-        print("Ingrese 2 si quiere pasar de binario a flotante")
-        des=int(input("--"))
-        if(des==1):
-            print("Ingrese el número decimal con parte fraccionaria")
-            print("La parte fraccionaria deben ser sumas de 2^(-n), por ejemplo .625")
-            flotante=float(input("--"))
+
+def main():
+    '''Main function that starts the program '''
+    while(True):
+        print("==================================================   ")
+        print("BIENVENIDO AL SISTEMA CONVERSIÓN DE NÚMEROS BINARIOS")
+        print("ESCOGA UNA OPCION")
+        print("1.-PASAR DE FLOTANTE A BINARIO")
+        print("2.-PASAR DE BINARIO A FLOTANTE")
+        print("3.-SALIR")
+        decision = int(input('->'))
+        if decision == 1:
+            print("INGRESE EL NÚMERO DECIMAL CON PARTE FRACCIONARIA")
+            print("LA PARTE FRACCIONARIA DEBEN SER SUMAS DE 2^(-N), POR EJEMPLO .625")
+            flotante=float(input("->"))
             resultado=dectofloat(flotante)
-            print("Resultado: "+resultado)
-        if(des==2):
-            print("Ingrese los 32 bits")
-            bits=str(input("--"))
+            print("RESULTADO: "+resultado)
+        elif decision == 2:
+            print("INGRESE LOS 32 BITS")
+            bits=str(input("->"))
             resultado=str(floattodec(bits))
-            print("Resultado: "+resultado)
-        print("Repetimos?")
-        print("1. Sí")
-        print("2. No")
-        a=int(input("--"))
-        if (a==1):
-            exit=True
+            print("RESULTADO: "+resultado)
+        elif decision == 3:
+            return
         else:
-            exit=False
+            print("INGRESE UN VALOR CORRECTO") 
+        print("==================================================\n")
 
-menu()
+main()
