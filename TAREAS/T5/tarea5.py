@@ -1,8 +1,7 @@
 import string
 
-
-def dectofloat(dec):
-    '''Converts decimal part to binary'''
+def float_to_binary(dec):
+    '''Converts a float numner to binary, Recives decimal. Returns 32 bit representation'''
     if(dec<0):
         signo=str(1)
     else:
@@ -48,8 +47,8 @@ def dectofloat(dec):
 
 
 
-def floattodec(bit):
-    '''Converts decimal part to binary'''
+def binary_to_float(bit):
+    '''Converts 32 bit representation to decimal.  Recives 32 bit representation. Returns decimal.  '''
     s=int(bit[0])
     n=bit[1:9]
     exp=binario_a_decimal(n)
@@ -62,11 +61,12 @@ def floattodec(bit):
             suma=suma+1/(contador)
     suma=suma+1
     d=((-1)**s)*(2**(exp-127))*suma
-    print(d)
+    #print(d)
+    return d
 
 
 def binario_a_decimal(binario):
-    '''Transforms binary to decimal'''
+    '''Transform decimal part of binary to decimal. Recives binary'''
     posicion = 0
     decimal = 0
     binario = binario[::-1]
@@ -94,12 +94,12 @@ def main():
             print("INGRESE EL NÚMERO DECIMAL CON PARTE FRACCIONARIA")
             print("LA PARTE FRACCIONARIA DEBEN SER SUMAS DE 2^(-N), POR EJEMPLO .625")
             flotante=float(input("->"))
-            resultado=dectofloat(flotante)
+            resultado=float_to_binary(flotante)
             print("RESULTADO: "+resultado)
         elif decision == 2:
             print("INGRESE LOS 32 BITS")
             bits=str(input("->"))
-            resultado=str(floattodec(bits))
+            resultado=str(binary_to_float(bits))
             print("RESULTADO: "+resultado)
         elif decision == 3:
             return
