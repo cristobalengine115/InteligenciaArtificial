@@ -77,6 +77,7 @@ class Grafo:
 
 
 	def rutaD(self,destino):
+		'''Indica la ruta mas corta que existe entre el nodo origen y el nodo destino'''
 		end = False
 		route = []
 		route.append(destino)
@@ -94,6 +95,7 @@ class Grafo:
 		return route
 
 	def dijkstra(self,destino):
+		'''Algoritmo Dijkstra que calcula la distancia minima y su respectiva ruta entre un punto A y un punto B'''
 		actual = self.nodos[self.nodo_inicial].nombre
 		for v in self.nodos:
 			self.nodo_no_visitados.append(v)
@@ -111,6 +113,7 @@ class Grafo:
 			actual = self.minimo(self.nodo_no_visitados)
 
 	def a_star(self,nodo_final):	
+		'''Algoritmo de A*'''
 		self.nodo_no_visitados().append(self.nodos(self.nodo_inicial))
 		actual = self.nodo_no_visitados[0]
 		while(len(self.nodo_no_visitados() != 0 )):
@@ -131,7 +134,7 @@ def aplicacion_Grafo():
 	mi_grafo.createGrafo('A,B7,C9;B,A7,D8;D,B8,C6,E5,F12;F,D12,E17;E,C2,D5,F17;C,A9,D6,E2')
 	print("===INFORMACIÓN GRAFO CREADO PARA DIJKSTRA===")
 	mi_grafo.impriGrafo()
-	mi_grafo.dijkstra('F')
+	mi_grafo.dijkstra('D')
 	mi_grafo.impriGrafo()
 	##A*
 	graph_two = Grafo('A')
