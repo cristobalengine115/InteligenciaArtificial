@@ -6,6 +6,7 @@ class Nodo:
 		self.nombre = nombre
 		self.anterior = None
 		self.dist_tentativa = dist_tentativa
+		self.dist_tentativa_f = dist_tentativa
 		self.euristica = euristica
 		self.vecinos = vecinos
 		self.orden = []
@@ -14,7 +15,7 @@ class Nodo:
 		'''Imprime la información del grafo y si detecta una eurisitica de -1 se desprecia'''
 		print('Nodo: ' +str(self.nombre) + ' -Distancia tentativa: '+ str('infinito' if self.dist_tentativa == 1000 else self.dist_tentativa) +' -Vecinos: '+ str(self.vecinos) +' -Anterior: '+ str(self.anterior), end = '')
 		if self.euristica != -1:
-			print(' -Euristica: '+str(self.euristica))
+			print(' -Euristica: '+str(self.euristica)+' Distancia tentativa F: '+ str(self.dist_tentativa_f))
 		else:
 			print('')
 
@@ -59,7 +60,7 @@ class Grafo:
 					else:
 						nodo = Nodo(vecinos_n[0][0],1000,vecinos,vecinos_n[0][1:])		
 
-			self.nodos[vecinos_n[0]] = nodo
+			self.nodos[vecinos_n[0][0]] = nodo
 			
 	
 
@@ -75,6 +76,13 @@ class Grafo:
 			return vector
 		return None
 
+	def find(self, cerrado,nodo):
+		if len(cerrado) > 0:
+			for e in cerrado:
+				if nodo == e.nombre:
+					return True
+			return False
+
 
 	def rutaD(self,destino):
 		end = False
@@ -87,6 +95,8 @@ class Grafo:
 				end = True
 			else:
 				ant = str(self.nodos[ant].anterior)
+				print('Valor ant')
+				print(ant)
 				route.append(ant)
 
 		route.reverse()
@@ -111,15 +121,46 @@ class Grafo:
 			actual = self.minimo(self.nodo_no_visitados)
 
 	def a_star(self,nodo_final):	
-		self.nodo_no_visitados().append(self.nodos(self.nodo_inicial))
+		#print(self.nodos[self.nodo_inicial])
+		#print(self.nodos['A'])
+		self.nodo_no_visitados.append(self.nodos[str(self.nodo_inicial)])
+		cerrado = []
 		actual = self.nodo_no_visitados[0]
-		while(len(self.nodo_no_visitados() != 0 )):
-			if(actual.nombre == self.nodos(nodo_final).nombre ):
-				#Metodo
+		while(len(self.nodo_no_visitados) != 0 ):
+			if(actual.nombre == self.nodos[nodo_final].nombre ):
+				return #self.rutaD(nodo_final)
 
-				pass
-			
-		
+				
+			self.nodo_no_visitados.remove(actual)
+			cerrado.append(self.nodos[actual.nombre]) 
+
+			for i in actual.vecinos:
+				#print('Valor de i')
+				#print(i)
+				if self.find(cerrado,i):
+					pass
+				else:
+					#if self.nodos[actual].dist_tentativa + int(self.nodos[actual].vecinos[i]) < self.nodos[i].dist_tentativa:
+					#	self.nodos[i].dist_tentativa = self.nodos[actual].dist_tentativa + int(self.nodos[actual].vecinos[i])
+					#	self.nodos[i].anterior = actual
+					if self.find(self.nodo_no_visitados,i):
+						pass
+					else:
+						self.nodo_no_visitados.append(self.nodos[i])
+						print(cerrado[0].nombre)
+					if self.nodos[actual.nombre].dist_tentativa >= int(self.nodos[actual.nombre].vecinos[i]):
+						#print('Paso')
+						pass
+					else:
+						self.nodos[i].anterior = actual.nombre
+						print(self.nodos[actual.nombre].vecinos[i])
+						self.nodos[i].dist_tentativa = self.nodos[actual.nombre].dist_tentativa + int(self.nodos[actual.nombre].vecinos[i])
+						self.nodos[i].dist_tentativa_f = self.nodos[i].dist_tentativa + int(self.nodos[i].euristica)
+
+			actual = self.nodo_no_visitados[0]
+			print('Actual: ')
+			print(actual.nombre)
+		#self.rutaD(nodo_final)
 	
 
 
@@ -127,18 +168,18 @@ class Grafo:
 
 def aplicacion_Grafo():
 	##DIJKSTRA
-	mi_grafo = Grafo('A')
-	mi_grafo.createGrafo('A,B7,C9;B,A7,D8;D,B8,C6,E5,F12;F,D12,E17;E,C2,D5,F17;C,A9,D6,E2')
-	print("===INFORMACIÓN GRAFO CREADO PARA DIJKSTRA===")
-	mi_grafo.impriGrafo()
-	mi_grafo.dijkstra('F')
-	mi_grafo.impriGrafo()
+	#mi_grafo = Grafo('A')
+	#mi_grafo.createGrafo('A,B7,C9;B,A7,D8;D,B8,C6,E5,F12;F,D12,E17;E,C2,D5,F17;C,A9,D6,E2')
+	#print("===INFORMACIÓN GRAFO CREADO PARA DIJKSTRA===")
+	#mi_grafo.impriGrafo()
+	#mi_grafo.dijkstra('F')
+	#mi_grafo.impriGrafo()
 	##A*
 	graph_two = Grafo('A')
 	graph_two.createGrafo('A55,B15,E20;B40,A15,C20,F40;C25,B20,D30;D40,C25,G40;E45,A20,F30;F20,E30,G20;G0,D40,F20',True)
 	print("===INFORMACIÓN GRAFO CREADO PARA A*===")
 	graph_two.impriGrafo()
-	# graph_two.a_star('G')
-	# graph_two.impriGrafo()
+	graph_two.a_star('G')
+	graph_two.impriGrafo()
 
 aplicacion_Grafo()
