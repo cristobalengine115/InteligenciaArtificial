@@ -108,8 +108,8 @@ class Grafo:
 				end = True
 			else:
 				ant = str(self.nodos[ant].anterior)
-				print('Valor ant')
-				print(ant)
+				# print('Valor ant')
+				# print(ant)
 				route.append(ant)
 
 		route.reverse()
@@ -136,64 +136,41 @@ class Grafo:
 
 	def a_star(self,nodo_final):	
 		'''Algoritmo de A*'''
-		#print(self.nodos[self.nodo_inicial])
-		#print(self.nodos['A'])
 		self.nodo_no_visitados.append(self.nodos[str(self.nodo_inicial)])
 		cerrado = []
-
-		
-
 		actual = self.nodo_no_visitados[0]
 		while(len(self.nodo_no_visitados) != 0 ):
 			if(actual.nombre == self.nodos[nodo_final].nombre ):
-
 				finales = []
 				for i in self.nodos[actual.nombre].vecinos:
 					finales.append(self.nodos[i])
 
 				anterior = self.minimo_euristico(finales)
-
 				actual.anterior = anterior.nombre
 				self.nodos[actual.nombre].dist_tentativa = self.nodos[anterior.nombre].dist_tentativa + int(self.nodos[anterior.nombre].vecinos[actual.nombre])
 				self.nodos[actual.nombre].dist_tentativa_f = self.nodos[actual.nombre].dist_tentativa + int(self.nodos[actual.nombre].euristica)
-				pass
-
-				
+				pass			
 			self.nodo_no_visitados.remove(actual)
 			cerrado.append(self.nodos[actual.nombre]) 
 
 			for i in actual.vecinos:
-				#print('Valor de i')
-				#print(i)
 				if self.find(cerrado,i):
 					pass
 				else:
-					#if self.nodos[actual].dist_tentativa + int(self.nodos[actual].vecinos[i]) < self.nodos[i].dist_tentativa:
-					#	self.nodos[i].dist_tentativa = self.nodos[actual].dist_tentativa + int(self.nodos[actual].vecinos[i])
-					#	self.nodos[i].anterior = actual
 					if self.find(self.nodo_no_visitados,i):
 						pass
 					else:
 						self.nodo_no_visitados.append(self.nodos[i])
-						print(cerrado[0].nombre)
-
 					if self.nodos[actual.nombre].dist_tentativa > int(self.nodos[actual.nombre].vecinos[i]):
-						#print('Paso')
 						pass
 					else:
 						self.nodos[i].anterior = actual.nombre
-						print('Valor i')
-						print(i)
-						print('Valor vecinos')
-						print(self.nodos[actual.nombre].vecinos[i])
 						self.nodos[i].dist_tentativa = self.nodos[actual.nombre].dist_tentativa + int(self.nodos[actual.nombre].vecinos[i])
 						self.nodos[i].dist_tentativa_f = self.nodos[i].dist_tentativa + int(self.nodos[i].euristica)
 
 
 			actual = self.minimo_euristico(self.nodo_no_visitados)
-			#print('Actual: ')
-			#print(actual.nombre)
-		#self.rutaD(nodo_final)
+		return self.rutaD(nodo_final)
 	
 
 
@@ -202,19 +179,12 @@ class Grafo:
 def aplicacion_Grafo():
 	##DIJKSTRA
 
-	#mi_grafo = Grafo('A')
-	#mi_grafo.createGrafo('A,B7,C9;B,A7,D8;D,B8,C6,E5,F12;F,D12,E17;E,C2,D5,F17;C,A9,D6,E2')
-	#print("===INFORMACIÓN GRAFO CREADO PARA DIJKSTRA===")
-	#mi_grafo.impriGrafo()
-	#mi_grafo.dijkstra('F')
-	#mi_grafo.impriGrafo()
-
-	#mi_grafo = Grafo('A')
-	#mi_grafo.createGrafo('A,B7,C9;B,A7,D8;D,B8,C6,E5,F12;F,D12,E17;E,C2,D5,F17;C,A9,D6,E2')
-	#print("===INFORMACIÓN GRAFO CREADO PARA DIJKSTRA===")
-	#mi_grafo.impriGrafo()
-	#mi_grafo.dijkstra('D')
-	#mi_grafo.impriGrafo()
+	mi_grafo = Grafo('A')
+	mi_grafo.createGrafo('A,B7,C9;B,A7,D8;D,B8,C6,E5,F12;F,D12,E17;E,C2,D5,F17;C,A9,D6,E2')
+	print("===INFORMACIÓN GRAFO CREADO PARA DIJKSTRA===")
+	mi_grafo.impriGrafo()
+	mi_grafo.dijkstra('D')
+	mi_grafo.impriGrafo()
 
 	##A*
 	graph_two = Grafo('A')
