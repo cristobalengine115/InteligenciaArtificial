@@ -76,6 +76,18 @@ class Grafo:
 			return vector
 		return None
 
+	def minimo_euristico(self, nodos):
+		'''Método que determina el menor costo de la distancia entre el nodo origen y final'''
+		if len(nodos) > 0:
+			minus = self.nodos[nodos[0].nombre].dist_tentativa_f
+			vector = nodos[0]
+			for e in nodos:
+				if minus > self.nodos[e.nombre].dist_tentativa_f:
+					minus = self.nodos[e.nombre].dist_tentativa_f
+					vector = e
+			return vector
+		return None
+
 	def find(self, cerrado,nodo):
 		if len(cerrado) > 0:
 			for e in cerrado:
@@ -103,7 +115,7 @@ class Grafo:
 		route.reverse()
 		print('La distancia mas corta es: '+ str(route))
 		return route
-
+	#def reconstruir(self,)
 	def dijkstra(self,destino):
 		'''Algoritmo Dijkstra que calcula la distancia minima y su respectiva ruta entre un punto A y un punto B'''
 		actual = self.nodos[self.nodo_inicial].nombre
@@ -134,7 +146,17 @@ class Grafo:
 		actual = self.nodo_no_visitados[0]
 		while(len(self.nodo_no_visitados) != 0 ):
 			if(actual.nombre == self.nodos[nodo_final].nombre ):
-				return #self.rutaD(nodo_final)
+
+				finales = []
+				for i in self.nodos[actual.nombre].vecinos:
+					finales.append(self.nodos[i])
+
+				anterior = self.minimo_euristico(finales)
+
+				actual.anterior = anterior.nombre
+				self.nodos[actual.nombre].dist_tentativa = self.nodos[anterior.nombre].dist_tentativa + int(self.nodos[anterior.nombre].vecinos[actual.nombre])
+				self.nodos[actual.nombre].dist_tentativa_f = self.nodos[actual.nombre].dist_tentativa + int(self.nodos[actual.nombre].euristica)
+				pass
 
 				
 			self.nodo_no_visitados.remove(actual)
@@ -154,18 +176,23 @@ class Grafo:
 					else:
 						self.nodo_no_visitados.append(self.nodos[i])
 						print(cerrado[0].nombre)
-					if self.nodos[actual.nombre].dist_tentativa >= int(self.nodos[actual.nombre].vecinos[i]):
+
+					if self.nodos[actual.nombre].dist_tentativa > int(self.nodos[actual.nombre].vecinos[i]):
 						#print('Paso')
 						pass
 					else:
 						self.nodos[i].anterior = actual.nombre
+						print('Valor i')
+						print(i)
+						print('Valor vecinos')
 						print(self.nodos[actual.nombre].vecinos[i])
 						self.nodos[i].dist_tentativa = self.nodos[actual.nombre].dist_tentativa + int(self.nodos[actual.nombre].vecinos[i])
 						self.nodos[i].dist_tentativa_f = self.nodos[i].dist_tentativa + int(self.nodos[i].euristica)
 
-			actual = self.nodo_no_visitados[0]
-			print('Actual: ')
-			print(actual.nombre)
+
+			actual = self.minimo_euristico(self.nodo_no_visitados)
+			#print('Actual: ')
+			#print(actual.nombre)
 		#self.rutaD(nodo_final)
 	
 
