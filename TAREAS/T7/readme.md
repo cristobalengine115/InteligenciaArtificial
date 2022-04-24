@@ -18,3 +18,7 @@ python3 tarea7.py
 ### Ejecutar Pruebas Unitarias ###
 En este caso las pruebas unitarias estan declaradas en el archivo de la tarea debido a que se implementaron com test driven development, el resultado de todas las operaciones tiene que dar True debido a que se compara el resultado obtenido con el resultado eserad
 
+GRAFO 1 PARA DIJKSTRA
+![Grafo1](Grafo1.jpeg)
+GRAFO 2 PARA DIJKSTRA
+![Grafo2](Grafo2.jpeg)
