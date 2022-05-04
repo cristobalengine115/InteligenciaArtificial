@@ -193,7 +193,7 @@ class Grafo:
 			actual = self.minimo_euristico(self.nodo_no_visitados)
 			#print('Actual: ')
 			#print(actual.nombre)
-		#self.rutaD(nodo_final)
+		self.rutaD(nodo_final)
 	
 
 
