@@ -69,33 +69,11 @@ class Grafo:
 			
 			time.sleep(1)
 				
-					
-
-		
-			
 	
 
 def aplicacion_Grafo():
-	##DIJKSTRA
-
-	#mi_grafo = Grafo('A')
-	#mi_grafo.createGrafo('A,B7,C9;B,A7,D8;D,B8,C6,E5,F12;F,D12,E17;E,C2,D5,F17;C,A9,D6,E2')
-	#print("===INFORMACIÓN GRAFO CREADO PARA DIJKSTRA===")
-	#mi_grafo.impriGrafo()
-	#mi_grafo.dijkstra('F')
-	#mi_grafo.impriGrafo()
-
-	#mi_grafo = Grafo('A')
-	#mi_grafo.createGrafo('A,B7,C9;B,A7,D8;D,B8,C6,E5,F12;F,D12,E17;E,C2,D5,F17;C,A9,D6,E2')
-	#print("===INFORMACIÓN GRAFO CREADO PARA DIJKSTRA===")
-	#mi_grafo.impriGrafo()
-	#mi_grafo.dijkstra('D')
-	#mi_grafo.impriGrafo()
-
-	#S,S80,L05,N15;N,N50,L30,S20;L,L60,N20,S20
 	graph_two = Grafo('N')
 	graph_two.createGrafo('S,S80,L05,N15;N,N50,L30,S20;L,L60,N20,S20')
-	print("===INFORMACIÓN GRAFO CREADO PARA A*===")
 	graph_two.impriGrafo()
 	graph_two.Markov()
 
